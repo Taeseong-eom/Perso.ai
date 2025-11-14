@@ -208,7 +208,10 @@ def main():
         # 채팅 통계
         st.markdown("---")
         st.subheader("📈 채팅 통계")
-        st.metric("총 메시지 수", len(st.session_state.messages))
+        user_message_count = sum(1 for msg in st.session_state.messages if msg.get("role") == "user")
+        assistant_message_count = sum(1 for msg in st.session_state.messages if msg.get("role") == "assistant")
+        st.metric("총 질문 수", user_message_count)
+        st.metric("총 응답 수", assistant_message_count)
 
 if __name__ == "__main__":
     main()

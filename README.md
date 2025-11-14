@@ -1,4 +1,3 @@
-```markdown
 #  Perso.ai Q&A 챗봇 시스템
 
 > **Vector Database 기반 지능형 질의응답 시스템**  
@@ -149,3 +148,4 @@ if answer is None:
 | `device` | cpu | 연산 장치 | GPU 사용시 'cuda' |
 
 ```
+

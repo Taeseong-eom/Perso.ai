@@ -23,7 +23,13 @@ import streamlit as st
 import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='langchain_core')
 
-from vector_db import create_vector_db, load_vector_db, get_answer, SIMILARITY_THRESHOLD
+from vector_db import (
+    create_vector_db,
+    load_vector_db,
+    get_answer,
+    SIMILARITY_THRESHOLD,
+    VECTOR_DB_PATH,
+)
 
 # ==================== 페이지 설정 ====================
 st.set_page_config(
@@ -32,9 +38,6 @@ st.set_page_config(
     layout="wide",  # wide: 더 넓은 화면 활용
     initial_sidebar_state="expanded"  # 사이드바 기본 열림
 )
-
-# Vector DB 저장 경로
-VECTOR_DB_PATH = os.path.join("data", "vector_db")
 
 # ==================== 캐싱 전략 ====================
 @st.cache_resource(show_spinner=False)
@@ -211,7 +214,6 @@ def main():
         user_message_count = sum(1 for msg in st.session_state.messages if msg.get("role") == "user")
         assistant_message_count = sum(1 for msg in st.session_state.messages if msg.get("role") == "assistant")
         st.metric("총 질문 수", user_message_count)
-        st.metric("총 응답 수", assistant_message_count)
 
 if __name__ == "__main__":
     main()

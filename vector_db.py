@@ -35,7 +35,7 @@ load_dotenv()
 # Vector DB 저장 경로
 VECTOR_DB_PATH = os.path.join("data", "vector_db")
 
-# 유사도 임계값 (기능에 영향 없음, 설명용)
+# 유사도 임계값 (공용 설정)
 SIMILARITY_THRESHOLD = 0.01  # 기본 유사도 임계값
 """
 임계값 0.01 선정 근거:
@@ -75,7 +75,7 @@ def create_vector_db(embedding_model="huggingface", persist_directory=None):
     # Excel 파일에서 데이터 로드
     xlsx_path = os.path.join("data", "qa_data.xlsx")
     loader = ExcelLoader(file_path=xlsx_path)
-    documents, qa_list = loader.load()
+    documents, _ = loader.load()
     
     print(f"✅ 총 {len(documents)}개의 Q&A 문서를 로드했습니다.\n")
     
@@ -189,7 +189,7 @@ def search_similar_questions(query, vector_db, k=3):
     
     return results
 
-def get_answer(query, vector_db, similarity_threshold=0.01):
+def get_answer(query, vector_db, similarity_threshold=SIMILARITY_THRESHOLD):
     """
     질문에 대한 가장 유사한 답변을 반환합니다.
     

@@ -1,3 +1,3 @@
 .env
 venv/
-data/
+data/vector_db/
